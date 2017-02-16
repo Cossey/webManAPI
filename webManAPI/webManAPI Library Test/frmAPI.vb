@@ -8,8 +8,66 @@ Public Class frmAPI
 
     Private ImageListItem As ImageList
     Private CancelImageLoad As Boolean = False
+
+
+
     Private Async Sub btnConnect_Click(sender As Object, e As EventArgs) Handles btnConnect.Click
         psAPI = New webMan(txtAddress.Text)
+
+
+    End Sub
+
+    Private Sub frmAPI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        timerTemp.Interval = 3000
+        AddHandler timerTemp.Tick, AddressOf UpdateTemp
+        cmbType.SelectedIndex = 1
+    End Sub
+
+    Async Sub UpdateTemp()
+        timerTemp.Stop()
+        Dim temp = Await psAPI.GetTemperatureExAsync()
+        tsslTemp.Text = String.Format("CPU: {0}, RSX: {1}, Fan: {2}%", temp.DegC.CPU, temp.DegC.RSX, temp.FanSpeed)
+        timerTemp.Start()
+    End Sub
+
+    Async Sub btnMountGame_Click(sender As Object, e As EventArgs) Handles btnMountGame.Click
+        Await psAPI.MountGameAsync(DirectCast(lvGames.SelectedItems(0).Tag, PS3GameItem), chkLaunch.Checked)
+    End Sub
+
+    Private Sub btnStopLoadCovers_Click(sender As Object, e As EventArgs) Handles btnStopLoadCovers.Click
+        CancelImageLoad = True
+    End Sub
+
+    Private Async Sub btnTurnOff_Click(sender As Object, e As EventArgs) Handles btnTurnOff.Click
+        Await psAPI.ShutdownAsync
+    End Sub
+
+    Private Async Sub btnRestart_Click(sender As Object, e As EventArgs) Handles btnRestart.Click
+        Await psAPI.RestartAsync
+    End Sub
+
+    Private Sub cmbType_TextChanged(sender As Object, e As EventArgs) Handles cmbType.TextChanged
+        Select Case cmbType.SelectedIndex
+            Case 0
+                lvGames.View = View.Details
+
+            Case 1
+                lvGames.View = View.LargeIcon
+
+        End Select
+    End Sub
+
+    Private Async Sub btnUnmount_Click(sender As Object, e As EventArgs) Handles btnUnmount.Click
+        Await psAPI.UnmountGameAsync
+    End Sub
+
+    Private Async Sub btnOn_Click(sender As Object, e As EventArgs) Handles btnOn.Click
+        Dim MAC As String = InputBox("Enter the MAC Address of the PlayStation 3:", "MAC Address", "00-00-00-00-00-00")
+        Await psAPI.PowerOnAsync(MAC, True)
+        'psAPI.PowerOn(MAC, True)
+    End Sub
+
+    Private Async Sub btnLoadGames_Click(sender As Object, e As EventArgs) Handles btnLoadGames.Click
 
         timerTemp.Start()
         Dim PSitm As List(Of PS3GameItem)
@@ -60,50 +118,5 @@ Public Class frmAPI
         lvGames.Columns(1).AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
 
         tsslStatus.Text = "Finished"
-
-    End Sub
-
-    Private Sub frmAPI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        timerTemp.Interval = 3000
-        AddHandler timerTemp.Tick, AddressOf UpdateTemp
-        cmbType.SelectedIndex = 1
-    End Sub
-
-    Async Sub UpdateTemp()
-        timerTemp.Stop()
-        Dim temp = Await psAPI.GetTemperatureExAsync()
-        tsslTemp.Text = String.Format("CPU: {0}, RSX: {1}, Fan: {2}%", temp.DegC.CPU, temp.DegC.RSX, temp.FanSpeed)
-        timerTemp.Start()
-    End Sub
-
-    Async Sub btnMountGame_Click(sender As Object, e As EventArgs) Handles btnMountGame.Click
-        Await psAPI.MountGameAsync(DirectCast(lvGames.SelectedItems(0).Tag, PS3GameItem), chkLaunch.Checked)
-    End Sub
-
-    Private Sub btnStopLoadCovers_Click(sender As Object, e As EventArgs) Handles btnStopLoadCovers.Click
-        CancelImageLoad = True
-    End Sub
-
-    Private Async Sub btnTurnOff_Click(sender As Object, e As EventArgs) Handles btnTurnOff.Click
-        Await psAPI.ShutdownAsync
-    End Sub
-
-    Private Async Sub btnRestart_Click(sender As Object, e As EventArgs) Handles btnRestart.Click
-        Await psAPI.RestartAsync
-    End Sub
-
-    Private Sub cmbType_TextChanged(sender As Object, e As EventArgs) Handles cmbType.TextChanged
-        Select Case cmbType.SelectedIndex
-            Case 0
-                lvGames.View = View.Details
-
-            Case 1
-                lvGames.View = View.LargeIcon
-
-        End Select
-    End Sub
-
-    Private Async Sub btnUnmount_Click(sender As Object, e As EventArgs) Handles btnUnmount.Click
-        Await psAPI.UnmountGameAsync
     End Sub
 End Class

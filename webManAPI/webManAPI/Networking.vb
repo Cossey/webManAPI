@@ -33,7 +33,7 @@
 
         Next
 
-        Await udpClient.SendAsync(sendBytes, sendBytes.Length, LanSubnet, Port)
+        Dim tskint = Await udpClient.SendAsync(sendBytes, sendBytes.Length, LanSubnet, Port)
     End Function
 
     Friend Shared Sub SendMagicPacket(MacAddress As String, LanSubnet As String)

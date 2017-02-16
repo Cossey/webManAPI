@@ -3,9 +3,9 @@ Imports System.Net
 Imports Newtonsoft.Json
 
 ''' <summary>
-''' Remotely control webManager and the PlayStation 3 console.
+''' Remotely control the PlayStation 3 via webMAN MOD.
 ''' </summary>
-Public Class webMan
+Public Class webMAN
 
     Public Enum PS3ControllerButton
         <Description("psbtn")>
@@ -62,6 +62,10 @@ Public Class webMan
 
     Dim IPAddress As String
 
+    ''' <summary>
+    ''' Gets the version of the library.
+    ''' </summary>
+    ''' <returns></returns>
     Public Shared Function [Version]() As Version
         Return My.Application.Info.Version
     End Function
@@ -75,10 +79,11 @@ Public Class webMan
     End Sub
 
     ''' <summary>
-    ''' Powers on the console using Remote Play
+    ''' Powers on the console using Remote Play.
+    ''' The MAC Address is required to send a Wake-on-LAN Magic Packet.
     ''' </summary>
-    ''' <param name="MACAddress"></param>
-    ''' <param name="AutoExitRemotePlay"></param>
+    ''' <param name="MACAddress">The MAC Address of the PlayStation 3.</param>
+    ''' <param name="AutoExitRemotePlay">Send some controller commands to the PlayStation 3 so that it can exit remote play and sit at the XMB. It will auto power off after a few minutes of inactivity unless you establish a Remote Play connection or a cancel out of the Remote Play screen on the PlayStation 3.</param>
     Public Sub PowerOn(MACAddress As String, Optional AutoExitRemotePlay As Boolean = False)
         Networking.SendMagicPacket(MACAddress, "255.255.255.255")
         If AutoExitRemotePlay Then
@@ -88,14 +93,20 @@ Public Class webMan
         End If
     End Sub
 
-    Public Async Sub PowerOnAsync(MACAddress As String, Optional AutoExitRemotePlay As Boolean = False)
+    ''' <summary>
+    ''' Powers on the console using Remote Play via an asynchronous operation using a task object.
+    ''' The MAC Address is required to send a Wake-on-LAN Magic Packet.
+    ''' </summary>
+    ''' <param name="MACAddress">The MAC Address of the PlayStation 3.</param>
+    ''' <param name="AutoExitRemotePlay">Send some controller commands to the PlayStation 3 so that it can exit remote play and sit at the XMB. It will auto power off after a few minutes of inactivity unless you establish a Remote Play connection or a cancel out of the Remote Play screen on the PlayStation 3.</param>
+    Public Async Function PowerOnAsync(MACAddress As String, Optional AutoExitRemotePlay As Boolean = False) As Task
         Await Networking.SendMagicPacketAsync(MACAddress, "255.255.255.255")
         If AutoExitRemotePlay Then
-            Await Task.Delay(30000) 'Waits 30 seconds for the console to power on and then display the Remote Play Screen.
+            Await Task.Delay(32000) 'Waits 32 seconds for the console to power on and then display the Remote Play Screen.
             Await RemotePadAsync(PS3ControllerButton.PS)
             Await RemotePadAsync(PS3ControllerButton.Circle)
         End If
-    End Sub
+    End Function
 
     ''' <summary>
     ''' Send a controller pad button to the PlayStation 3 console.

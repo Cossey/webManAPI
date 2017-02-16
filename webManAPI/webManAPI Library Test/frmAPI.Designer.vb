@@ -27,6 +27,7 @@ Partial Class frmAPI
         Me.lvGames = New System.Windows.Forms.ListView()
         Me.chName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.chURL = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.lblAddress = New System.Windows.Forms.Label()
         Me.txtAddress = New System.Windows.Forms.TextBox()
         Me.btnConnect = New System.Windows.Forms.Button()
@@ -37,14 +38,15 @@ Partial Class frmAPI
         Me.tsslTemp = New System.Windows.Forms.ToolStripStatusLabel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnUnmount = New System.Windows.Forms.Button()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
-        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.btnStopLoadCovers = New System.Windows.Forms.Button()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnTurnOff = New System.Windows.Forms.Button()
         Me.btnRestart = New System.Windows.Forms.Button()
         Me.cmbType = New System.Windows.Forms.ComboBox()
-        Me.btnUnmount = New System.Windows.Forms.Button()
+        Me.btnOn = New System.Windows.Forms.Button()
+        Me.btnLoadGames = New System.Windows.Forms.Button()
         Me.ssSystem.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
@@ -74,6 +76,12 @@ Partial Class frmAPI
         Me.chURL.Text = "Location"
         Me.chURL.Width = 90
         '
+        'ImageList1
+        '
+        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
+        Me.ImageList1.Images.SetKeyName(0, "icon-iphone-retina.png")
+        '
         'lblAddress
         '
         Me.lblAddress.Anchor = System.Windows.Forms.AnchorStyles.Left
@@ -99,7 +107,7 @@ Partial Class frmAPI
         Me.btnConnect.Name = "btnConnect"
         Me.btnConnect.Size = New System.Drawing.Size(75, 23)
         Me.btnConnect.TabIndex = 3
-        Me.btnConnect.Text = "Connect"
+        Me.btnConnect.Text = "Set"
         Me.btnConnect.UseVisualStyleBackColor = True
         '
         'btnMountGame
@@ -179,10 +187,20 @@ Partial Class frmAPI
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(302, 29)
         Me.TableLayoutPanel2.TabIndex = 1
         '
+        'btnUnmount
+        '
+        Me.btnUnmount.Location = New System.Drawing.Point(224, 3)
+        Me.btnUnmount.Name = "btnUnmount"
+        Me.btnUnmount.Size = New System.Drawing.Size(75, 23)
+        Me.btnUnmount.TabIndex = 6
+        Me.btnUnmount.Text = "Unmount"
+        Me.btnUnmount.UseVisualStyleBackColor = True
+        '
         'TableLayoutPanel3
         '
         Me.TableLayoutPanel3.AutoSize = True
-        Me.TableLayoutPanel3.ColumnCount = 4
+        Me.TableLayoutPanel3.ColumnCount = 5
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
@@ -190,24 +208,19 @@ Partial Class frmAPI
         Me.TableLayoutPanel3.Controls.Add(Me.btnConnect, 2, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.txtAddress, 1, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.lblAddress, 0, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.btnStopLoadCovers, 3, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.btnStopLoadCovers, 4, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.btnLoadGames, 3, 0)
         Me.TableLayoutPanel3.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 1
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(391, 29)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(472, 29)
         Me.TableLayoutPanel3.TabIndex = 2
-        '
-        'ImageList1
-        '
-        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
-        Me.ImageList1.Images.SetKeyName(0, "icon-iphone-retina.png")
         '
         'btnStopLoadCovers
         '
-        Me.btnStopLoadCovers.Location = New System.Drawing.Point(268, 3)
+        Me.btnStopLoadCovers.Location = New System.Drawing.Point(349, 3)
         Me.btnStopLoadCovers.Name = "btnStopLoadCovers"
         Me.btnStopLoadCovers.Size = New System.Drawing.Size(120, 23)
         Me.btnStopLoadCovers.TabIndex = 4
@@ -218,24 +231,26 @@ Partial Class frmAPI
         'TableLayoutPanel4
         '
         Me.TableLayoutPanel4.AutoSize = True
-        Me.TableLayoutPanel4.ColumnCount = 3
+        Me.TableLayoutPanel4.ColumnCount = 4
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel4.Controls.Add(Me.btnTurnOff, 0, 0)
-        Me.TableLayoutPanel4.Controls.Add(Me.btnRestart, 1, 0)
-        Me.TableLayoutPanel4.Controls.Add(Me.cmbType, 2, 0)
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel4.Controls.Add(Me.btnTurnOff, 1, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.btnRestart, 2, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.cmbType, 3, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.btnOn, 0, 0)
         Me.TableLayoutPanel4.Location = New System.Drawing.Point(0, 29)
         Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
         Me.TableLayoutPanel4.RowCount = 1
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(289, 29)
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(370, 29)
         Me.TableLayoutPanel4.TabIndex = 3
         '
         'btnTurnOff
         '
-        Me.btnTurnOff.Location = New System.Drawing.Point(3, 3)
+        Me.btnTurnOff.Location = New System.Drawing.Point(84, 3)
         Me.btnTurnOff.Name = "btnTurnOff"
         Me.btnTurnOff.Size = New System.Drawing.Size(75, 23)
         Me.btnTurnOff.TabIndex = 0
@@ -244,7 +259,7 @@ Partial Class frmAPI
         '
         'btnRestart
         '
-        Me.btnRestart.Location = New System.Drawing.Point(84, 3)
+        Me.btnRestart.Location = New System.Drawing.Point(165, 3)
         Me.btnRestart.Name = "btnRestart"
         Me.btnRestart.Size = New System.Drawing.Size(75, 23)
         Me.btnRestart.TabIndex = 1
@@ -257,19 +272,28 @@ Partial Class frmAPI
         Me.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbType.FormattingEnabled = True
         Me.cmbType.Items.AddRange(New Object() {"Detail View", "Cover View"})
-        Me.cmbType.Location = New System.Drawing.Point(165, 4)
+        Me.cmbType.Location = New System.Drawing.Point(246, 4)
         Me.cmbType.Name = "cmbType"
         Me.cmbType.Size = New System.Drawing.Size(121, 21)
         Me.cmbType.TabIndex = 2
         '
-        'btnUnmount
+        'btnOn
         '
-        Me.btnUnmount.Location = New System.Drawing.Point(224, 3)
-        Me.btnUnmount.Name = "btnUnmount"
-        Me.btnUnmount.Size = New System.Drawing.Size(75, 23)
-        Me.btnUnmount.TabIndex = 6
-        Me.btnUnmount.Text = "Unmount"
-        Me.btnUnmount.UseVisualStyleBackColor = True
+        Me.btnOn.Location = New System.Drawing.Point(3, 3)
+        Me.btnOn.Name = "btnOn"
+        Me.btnOn.Size = New System.Drawing.Size(75, 23)
+        Me.btnOn.TabIndex = 3
+        Me.btnOn.Text = "Power On"
+        Me.btnOn.UseVisualStyleBackColor = True
+        '
+        'btnLoadGames
+        '
+        Me.btnLoadGames.Location = New System.Drawing.Point(268, 3)
+        Me.btnLoadGames.Name = "btnLoadGames"
+        Me.btnLoadGames.Size = New System.Drawing.Size(75, 23)
+        Me.btnLoadGames.TabIndex = 5
+        Me.btnLoadGames.Text = "Load Games"
+        Me.btnLoadGames.UseVisualStyleBackColor = True
         '
         'frmAPI
         '
@@ -315,4 +339,6 @@ Partial Class frmAPI
     Friend WithEvents btnRestart As Button
     Friend WithEvents cmbType As ComboBox
     Friend WithEvents btnUnmount As Button
+    Friend WithEvents btnOn As Button
+    Friend WithEvents btnLoadGames As Button
 End Class
