@@ -7,6 +7,9 @@ Imports Newtonsoft.Json
 ''' </summary>
 Public Class webMAN
 
+    ''' <summary>
+    ''' An enumeration for a Button on the PlayStation 3 Sixaxis Controller.
+    ''' </summary>
     Public Enum PS3ControllerButton
         <Description("psbtn")>
         PS

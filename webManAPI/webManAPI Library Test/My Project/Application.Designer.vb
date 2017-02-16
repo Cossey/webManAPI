@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.Sc.webManAPI.Test.frmAPI
+            Me.MainForm = Global.Sc.Gaming.webMan.TestApp.frmAPI
         End Sub
     End Class
 End Namespace

@@ -1,4 +1,7 @@
-﻿Public Class PS3TemperatureEx
+﻿''' <summary>
+''' Temperature and fan speed data from a PlayStation 3.
+''' </summary>
+Public Class PS3TemperatureEx
 
     Property DegC As PS3Temperature
     Property DegF As PS3Temperature

@@ -1,5 +1,5 @@
 ﻿''' <summary>
-''' An object containing temperatures for a PlayStation 3 console.
+''' Temperature data from a PlayStation 3.
 ''' </summary>
 Public Class PS3Temperature
     ''' <summary>

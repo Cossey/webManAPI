@@ -1,4 +1,6 @@
-﻿
+﻿''' <summary>
+''' PlayStation 3 system information.
+''' </summary>
 Public Class PS3Info
     ''' <summary>
     ''' The amount of RAM in use.
