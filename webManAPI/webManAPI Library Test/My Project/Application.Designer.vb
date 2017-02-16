@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.Cossey.webManAPI.Test.frmAPI
+            Me.MainForm = Global.Sc.webManAPI.Test.frmAPI
         End Sub
     End Class
 End Namespace

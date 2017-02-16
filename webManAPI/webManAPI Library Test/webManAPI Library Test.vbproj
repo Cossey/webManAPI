@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{80C6BC6F-8CC9-43CB-A0A7-606EB79C6E7E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>Cossey.webManAPI.Test.My.MyApplication</StartupObject>
-    <RootNamespace>Cossey.webManAPI.Test</RootNamespace>
+    <StartupObject>Sc.webManAPI.Test.My.MyApplication</StartupObject>
+    <RootNamespace>Sc.webManAPI.Test</RootNamespace>
     <AssemblyName>webManAPI Library Test</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>

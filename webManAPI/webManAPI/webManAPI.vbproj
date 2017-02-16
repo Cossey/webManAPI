@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A407BEB0-59AB-48D3-BF67-545587574E26}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Cossey.webManAPI</RootNamespace>
+    <RootNamespace>Sc.webManAPI</RootNamespace>
     <AssemblyName>webManAPI</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
@@ -67,6 +67,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnumExtensions.vb" />
+    <Compile Include="Networking.vb" />
     <Compile Include="PS3GameItem.vb" />
     <Compile Include="PS3Info.vb" />
     <Compile Include="PS3Temperature.vb" />

@@ -8,8 +8,8 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("webManager Remote API")>
-<Assembly: AssemblyDescription("Controls a PlayStation 3 with webManager installed remotely.")>
+<Assembly: AssemblyTitle("webMAN MOD Remote API")>
+<Assembly: AssemblyDescription("Controls a PlayStation 3 with remotely through webMAN MOD.")>
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("webManAPI")>
 <Assembly: AssemblyCopyright("")>

@@ -1,5 +1,5 @@
 ﻿Imports System.Reflection
-Imports Cossey.webManAPI
+Imports Sc.webManAPI
 
 Public Class frmAPI
 
