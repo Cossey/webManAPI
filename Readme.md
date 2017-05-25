@@ -26,7 +26,3 @@ There are still some items that could be implemented into this library:
 * Light
 
 Am happy to accept pull requests for any bug fixes or feature requests.
-
-Licence
-=======
-Soon...
